@@ -1,16 +1,10 @@
-import { http } from "../src";
+import { storage } from "../src";
 
-const userServices = {
-  list: http.get("https://jsonplaceholder.typicode.com/users", function () {
-    return {
-      params: {
-        other: "oke",
-      },
-      metaParams: {
-        page: 1,
-      },
-    };
-  }),
+const getUser = () => {
+  // const t = storage.get("oke_siap");
+  storage.save("arthur", { message: "1231231" });
+
+  // console.log("t", t);
 };
 
-userServices.list();
+getUser();

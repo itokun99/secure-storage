@@ -1,74 +1,58 @@
-import { Method, Option, ParamType, RequestApiOptions } from "./types";
-
-export const getContentType = (t?: string) => {
-  switch (t) {
-    case "form-data":
-      return "multipart/form-data";
-    case "url-enconded":
-      return "application/x-www-form-urlencoded";
-    default:
-      return "application/json";
-  }
+/**
+ * Function which is used to get the secure prefix
+ * @returns
+ */
+export const getSecurePrefix = (prefix: string): string => {
+  let KEY_PREFIX = prefix || "@7Ee1zrdtKG.";
+  if (!KEY_PREFIX.endsWith(".")) return KEY_PREFIX + ".";
+  return KEY_PREFIX;
 };
 
-export const getBody = (
-  m: Method,
-  t: RequestApiOptions["contentType"],
-  b: unknown,
-) => {
-  if (m !== "GET") {
-    return t === "form-data" ? b : JSON.stringify(b);
-  }
-  return;
+export const FINGERPRINT_KEYS = {
+  USERAGENT: "UserAgent",
+  SCREEN_PRINT: "ScreenPrint",
+  PLUGINS: "Plugins",
+  FONTS: "Fonts",
+  LOCAL_STORAGE: "LocalStorage",
+  SESSION_STORAGE: "SessionStorage",
+  TIMEZONE: "TimeZone",
+  LANGUAGE: "Language",
+  SYSTEM_LANGUAGE: "SystemLanguage",
+  COOKIE: "Cookie",
+  CANVAS: "Canvas",
+  HOSTNAME: "Hostname",
 };
 
-export function searchParamsToObject(
-  searchParams: string,
-): Record<string, string> {
-  const params = new URLSearchParams(searchParams);
-  const obj: Record<string, string> = {};
-  for (const [key, value] of params) {
-    obj[key] = value;
-  }
-  return obj;
-}
+/**
+ * Function which is used to get all the disabled keys
+ * @returns
+ */
+export const getDisabledKeys = (key: string): string[] => {
+  let DISABLED_KEYS = key || "";
+  if (DISABLED_KEYS === "") return [];
 
-export function objectToSearchParams(obj?: ParamType): string {
-  // Periksa apakah objek adalah null, undefined, atau bukan objek
-  if (!obj || typeof obj !== "object" || Array.isArray(obj)) {
-    return "";
-  }
-
-  // Pastikan semua kunci dan nilai dalam objek adalah string atau number dan bukan null/undefined
-  const params = new URLSearchParams();
-  Object.keys(obj).forEach((key) => {
-    const value = obj[key];
-    if (typeof value === "string" || typeof value === "number") {
-      params.append(key, value.toString());
-    }
+  const allOptions = [
+    FINGERPRINT_KEYS.USERAGENT,
+    FINGERPRINT_KEYS.SCREEN_PRINT,
+    FINGERPRINT_KEYS.PLUGINS,
+    FINGERPRINT_KEYS.FONTS,
+    FINGERPRINT_KEYS.LOCAL_STORAGE,
+    FINGERPRINT_KEYS.SESSION_STORAGE,
+    FINGERPRINT_KEYS.TIMEZONE,
+    FINGERPRINT_KEYS.LANGUAGE,
+    FINGERPRINT_KEYS.SYSTEM_LANGUAGE,
+    FINGERPRINT_KEYS.COOKIE,
+    FINGERPRINT_KEYS.CANVAS,
+    FINGERPRINT_KEYS.HOSTNAME,
+  ];
+  const response: string[] = [];
+  DISABLED_KEYS.split("|").forEach((key) => {
+    if (key === "") {
+    } else if (allOptions.includes(key)) response.push(key);
+    else
+      console.warn(
+        `${key} is not present in the available disabled keys options! Please go through the documentation`,
+      );
   });
-
-  return params.toString();
-}
-
-export function createEndpoint(
-  endpoint: string,
-  path?: string,
-  params?: ParamType,
-) {
-  if (!endpoint) return "";
-  let result = path ? `${endpoint}/${path}` : endpoint;
-
-  if (params) {
-    const qs = objectToSearchParams(params);
-    result = `${result}${qs ? `?${qs}` : ""}`;
-  }
-
-  return result;
-}
-
-export async function resolveRequestOptions(options?: Option) {
-  const resolve = typeof options === "function" ? await options() : options;
-
-  return resolve;
-}
+  return response;
+};
