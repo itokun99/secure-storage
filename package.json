@@ -1,8 +1,12 @@
 {
-  "name": "@hudoro/storage",
+  "name": "@itokun99/secure-storage",
   "version": "0.0.1",
-  "description": "Secure Storage for HSD App",
-  "author": "Prawito Hudoro",
+  "description": "react-secure-storage but modified by me",
+  "author": {
+    "name": "itokun99",
+    "url": "https://github.com/itokun99",
+    "email": "indrawanlisantopersonal@gmail.com"
+  },
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
@@ -22,16 +26,16 @@
   "devDependencies": {
     "@types/crypto-js": "^4.2.2",
     "@types/murmurhash-js": "^1.0.6",
-    "@types/node": "^20.12.7",
-    "@types/react": "^18.2.79",
-    "@types/react-dom": "^18.2.25",
+    "@types/node": "^20.16.5",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
     "path": "^0.12.7",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "typescript": "^5.4.5",
-    "url": "^0.11.3",
-    "vite": "^5.2.10",
-    "vite-plugin-dts": "^3.9.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.5.4",
+    "url": "^0.11.4",
+    "vite": "^5.4.3",
+    "vite-plugin-dts": "^3.9.1"
   },
   "dependencies": {
     "crypto-js": "^4.2.0",

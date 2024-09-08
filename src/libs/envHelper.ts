@@ -17,8 +17,7 @@ const getHashKey = () => {
         process.env.STORAGE_HASH_KEY ||
         process.env.REACT_APP_STORAGE_HASH_KEY ||
         process.env.NEXT_PUBLIC_STORAGE_HASH_KEY ||
-        process.env.VITE_STORAGE_HASH_KEY ||
-        process.env.HSD_STORAGE_HASH_KEY;
+        process.env.VITE_STORAGE_HASH_KEY;
     } else {
       console.warn(`warning : process is not defined! Just a warning!`);
     }
@@ -40,8 +39,7 @@ const getStoragePrefix = () => {
         process.env.STORAGE_KEY ||
         process.env.REACT_APP_STORAGE_KEY ||
         process.env.NEXT_PUBLIC_STORAGE_KEY ||
-        process.env.VITE_STORAGE_KEY ||
-        process.env.HSD_STORAGE_KEY;
+        process.env.VITE_STORAGE_KEY;
     } else {
       console.warn(`warning : process is not defined! Just a warning!`);
     }
@@ -62,8 +60,7 @@ const getDisabledKeys = () => {
         process.env.STORAGE_DISABLED_KEYS ||
         process.env.REACT_APP_STORAGE_DISABLED_KEYS ||
         process.env.NEXT_PUBLIC_STORAGE_DISABLED_KEYS ||
-        process.env.VITE_STORAGE_DISABLED_KEYS ||
-        process.env.HSD_STORAGE_DISABLED_KEYS;
+        process.env.VITE_STORAGE_DISABLED_KEYS;
     } else {
       console.warn(`warning : process is not defined! Just a warning!`);
     }
